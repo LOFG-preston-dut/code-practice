@@ -1,2 +1,9 @@
 # code-practice
-Code practice and assignments for Data Science and Artificial Intelligence  (Class 25T_KHDL), Faculty of Electronics and Artificial Intelligence - Danang University of Technology (DUT).
+
+This repository is dedicated to storing practice files, exercises, and assignments.
+
+## 📌 Information
+* **University:** Danang University of Technology (DUT)
+* **Faculty:** Faculty of Electronics and Artificial Intelligence
+* **Class:** 25T_KHDL (Data Science and Artificial Intelligence)
+* **Purpose:** Storing code practice and coursework materials.
