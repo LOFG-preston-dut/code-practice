@@ -8,39 +8,20 @@ void PrintArray(int arr[], int size){
     cout << endl;
 }
 
-void Heapify(int arr[], int n, int i){
-    int largest = i;
-    int left = 2*i + 1;
-    int right = 2*i + 2;
+void ShellSort(int arr[], int size){
+    for (int gap = size/2; gap > 0; gap = gap/2){
 
-    if (left < n && arr[largest] < arr[left]){
-        largest = left;
-    }
-    if (right < n && arr[largest] < arr[right]){
-        largest = right;
-    }
+        for (int i = gap; i < size; i++){
+            int temp = arr[i];
+            int j = i;
+        
+            while (j >= gap && arr[j-gap] > temp){
+                arr[j] = arr[j-gap];
+                j = j - gap;
+            }
 
-    if (largest != i){
-        int temp = arr[i];
-        arr[i] = arr[largest];
-        arr[largest] = temp;
-
-        Heapify(arr, n, largest);
-    }
-}
-
-void HeapSort(int arr[], int size){
-    for (int i = size/2 - 1; i >= 0; i--){
-        Heapify(arr, size, i);
-    }
-
-    for (int i = size - 1; i >= 0; i--){
-        int temp = arr[0];
-        arr[0] = arr[i];
-        arr[i] = temp;
-
-        Heapify(arr, i, 0);
-
+            arr[j] = temp;
+        }
     }
 }
 
@@ -53,7 +34,6 @@ int main(){
         return 0;
     }
     int* arr = new int[size];
-    
     cout << "Enter " << size << "elements of the array" << endl;
     for (int i = 0; i < size; i++){
         cout << "arr[" <<i<<"] = " <<endl;
@@ -61,7 +41,7 @@ int main(){
     }
     cout << "\n The original array: ";
     PrintArray(arr,size);
-    HeapSort(arr,size);
+    ShellSort(arr,size);
     cout <<endl;
     cout << "\n The sorted array: ";
     PrintArray(arr,size);
