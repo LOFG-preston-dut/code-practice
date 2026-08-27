@@ -1,0 +1,8 @@
+Bài 1.
+Viết chương trình cho phép thực hiện các thao tác trên kiểu mảng:
+Hàm nhập, xuất mảng.
+Lấy kích thước mảng.
+Lấy phần tử tại vị trí nào đó.
+Sắp xếp tăng, giảm (theo các phương pháp sắp xếp: Chọn trực tiếp, Chèn trực tiếp, Nổi bọt BubbleSort, QuickSort, HeapSort, ShellSort, RadixSort)
+Tìm phần tử nào đó trong mảng (tuần tự, nhị phân, nội suy)
+Yêu cầu dùng con trỏ hàm để chọn các phương pháp sắp xếp, chọn sắp xếp tăng giảm, và tương tự cho tìm kiếm.

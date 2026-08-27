@@ -1,0 +1,10 @@
+Bài 2. 
+Thông tin một học sinh bao gồm:
+Họ tên.
+Điểm văn, toán.
+Viết chương trình cho phép thực hiện các thao tác trên kiểu struct học sinh để quản lý danh sách (yêu cầu dùng DSLK) học sinh.
+Nhập, xuất thông tin học sinh.
+Tính điểm trung bình của mỗi học sinh.
+Xếp loại theo tiêu chí:
+Giỏi (>= 8.0), Khá (>= 7.0).
+Trung bình (>= 5.0), Yếu (< 5).
