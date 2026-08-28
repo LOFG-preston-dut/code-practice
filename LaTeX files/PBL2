@@ -1,0 +1,71 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}
+\usepackage[left=30mm, top=20mm, right=20mm, bottom=20mm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\begin{document}
+
+% --- Khung bìa ---
+\begin{tikzpicture}[remember picture, overlay]
+  \draw[line width=3pt]
+    ($(current page.north west)+(2.7cm,-1.8cm)$)
+    rectangle
+    ($(current page.south east)+(-1.8cm,1.8cm)$);
+\end{tikzpicture}
+
+\begin{center}
+    % --- Tiêu đề trường ---
+    \textbf{TRƯỜNG ĐẠI HỌC BÁCH KHOA} \\
+    \textbf{KHOA ĐIỆN TỬ VÀ TRÍ TUỆ NHÂN TẠO} \\
+    
+    \vspace{1.5cm}
+    
+    % --- Logo ---
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.25\textwidth]{logo.jpeg} 
+    \end{figure}
+
+    \vspace{1.5cm}
+
+    % --- Tên đồ án ---
+    {\Large \textbf{PBL2: DỰ ÁN CƠ SỞ LẬP TRÌNH}} \\
+    
+    \vspace{1.5cm}
+    
+    \begin{center}
+        \begin{minipage}{0.9\textwidth} % Minipage giúp kiểm soát khối chữ tốt hơn
+            \centering
+            {\fontsize{18pt}{24pt}\selectfont \textbf{ĐỀ TÀI: PHẦN MỀM QUẢN LÝ BỆNH NHÂN CỦA BỆNH VIỆN }}
+        \end{minipage}
+    \end{center}
+    
+    \vspace{3cm}
+    % --- Khối thông tin (Căn lề theo mẫu ảnh) ---
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{lllc}
+            \text{Người hướng dẫn:} & \multicolumn{3}{l}{\textbf{TS. NGUYỄN VĂN HIỆU}} \\
+            \text{Sinh viên thực hiện:} & & & \\
+            \textbf{Trần Thịnh Phát} & \textbf{LỚP: 25T\_KHDL}  \\
+            \textbf{Bùi Nguyễn Hoàng Long} & \textbf{LỚP: 25T\_KHDL}  \\
+        \end{tabular}
+    \end{table}
+
+    \vfill 
+
+    % --- Địa danh, thời gian ---
+    \textbf{Đà Nẵng, tháng 12 năm 2026}
+\end{center}
+
+\thispagestyle{empty} 
+\clearpage
+\newpage
+\begin{mbox}
+    
+\end{mbox}
+
+\end{document}}
