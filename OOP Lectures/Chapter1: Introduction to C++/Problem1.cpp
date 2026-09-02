@@ -1,101 +1,112 @@
 #include <iostream>
-
+#include <cmath>
 using namespace std;
 
-// Cấu trúc biểu diễn số phức: z = a + bi
-struct SoPhuc {
-    double thuc; // Phần thực
-    double ao;   // Phần ảo
+struct ComplexNumber {
+    double Real;
+    double Imaginary;
 };
 
-// Hàm nhập số phức
-void nhapSoPhuc(SoPhuc &z, const string &ten) {
-    cout << "Nhap " << ten << ":" << endl;
-    cout << "  Phan thuc: ";
-    cin >> z.thuc;
-    cout << "  Phan ao: ";
-    cin >> z.ao;
+ComplexNumber ComplexNumberInput() {
+    ComplexNumber NewNumber;
+    cout << "Enter the real part of the complex number: ";
+    cin >> NewNumber.Real;
+    cout << "Enter the imaginary part of the complex number: ";
+    cin >> NewNumber.Imaginary;
+    return NewNumber;
 }
 
-// Hàm xuất số phức dạng a + bi
-void xuatSoPhuc(const SoPhuc &z) {
-    if (z.ao >= 0) {
-        cout << z.thuc << " + " << z.ao << "i";
+void ComplexNumberOutput(ComplexNumber NewNumber) {
+    if (NewNumber.Imaginary >= 0) {
+        cout << NewNumber.Real << " + " << NewNumber.Imaginary << "i";
     } else {
-        cout << z.thuc << " - " << -z.ao << "i";
+        cout << NewNumber.Real << " - " << -NewNumber.Imaginary << "i";
     }
 }
 
-// Phép cộng: (a + bi) + (c + di) = (a + c) + (b + d)i
-SoPhuc cong(const SoPhuc &z1, const SoPhuc &z2) {
-    SoPhuc ketQua;
-    ketQua.thuc = z1.thuc + z2.thuc;
-    ketQua.ao = z1.ao + z2.ao;
-    return ketQua;
+double ComplexNumberModulus(ComplexNumber a) {
+    return sqrt(a.Real * a.Real + a.Imaginary * a.Imaginary);
 }
 
-// Phép trừ: (a + bi) - (c + di) = (a - c) + (b - d)i
-SoPhuc tru(const SoPhuc &z1, const SoPhuc &z2) {
-    SoPhuc ketQua;
-    ketQua.thuc = z1.thuc - z2.thuc;
-    ketQua.ao = z1.ao - z2.ao;
-    return ketQua;
+ComplexNumber Addition(ComplexNumber a, ComplexNumber b) {
+    ComplexNumber Result;
+    Result.Real = a.Real + b.Real;
+    Result.Imaginary = a.Imaginary + b.Imaginary;
+    return Result;
 }
 
-// Phép nhân: (a + bi)*(c + di) = (ac - bd) + (ad + bc)i
-SoPhuc nhan(const SoPhuc &z1, const SoPhuc &z2) {
-    SoPhuc ketQua;
-    ketQua.thuc = z1.thuc * z2.thuc - z1.ao * z2.ao;
-    ketQua.ao = z1.thuc * z2.ao + z1.ao * z2.thuc;
-    return ketQua;
+ComplexNumber Subtraction(ComplexNumber a, ComplexNumber b) {
+    ComplexNumber Result;
+    Result.Real = a.Real - b.Real;
+    Result.Imaginary = a.Imaginary - b.Imaginary;
+    return Result;
 }
 
-// Phép chia: (a + bi)/(c + di) = [(ac + bd) + (bc - ad)i] / (c^2 + d^2)
-bool chia(const SoPhuc &z1, const SoPhuc &z2, SoPhuc &ketQua) {
-    double mauSo = z2.thuc * z2.thuc + z2.ao * z2.ao;
+ComplexNumber Multiplication(ComplexNumber a, ComplexNumber b) {
+    ComplexNumber Result;
+    Result.Real = a.Real * b.Real - a.Imaginary * b.Imaginary;
+    Result.Imaginary = a.Imaginary * b.Real + a.Real * b.Imaginary;
+    return Result;
+}
+
+ComplexNumber Division(ComplexNumber a, ComplexNumber b) {
+    ComplexNumber Result;
+    double Denominator = b.Real * b.Real + b.Imaginary * b.Imaginary;
     
-    // Kiểm tra mẫu số bằng 0 (số phức thứ 2 bằng 0)
-    if (mauSo == 0) {
-        return false;
+    if (Denominator == 0) {
+        cout << "\nIt is not possible to divide a complex number by 0!\n";
+        Result.Real = 0;
+        Result.Imaginary = 0;
+        return Result;
     }
     
-    ketQua.thuc = (z1.thuc * z2.thuc + z1.ao * z2.ao) / mauSo;
-    ketQua.ao = (z1.ao * z2.thuc - z1.thuc * z2.ao) / mauSo;
-    return true;
+    Result.Real = (a.Real * b.Real + a.Imaginary * b.Imaginary) / Denominator;
+    Result.Imaginary = (a.Imaginary * b.Real - a.Real * b.Imaginary) / Denominator;
+    return Result;
+}
+
+bool Equalization(ComplexNumber a, ComplexNumber b) {
+    return (a.Real == b.Real) && (a.Imaginary == b.Imaginary);
+}
+
+bool Difference(ComplexNumber a, ComplexNumber b) {
+    return !Equalization(a, b);
+}
+
+bool Bigger(ComplexNumber a, ComplexNumber b) {
+    return (ComplexNumberModulus(a) > ComplexNumberModulus(b));
+}
+
+bool Smaller(ComplexNumber a, ComplexNumber b) {
+    return (ComplexNumberModulus(a) < ComplexNumberModulus(b));
 }
 
 int main() {
-    SoPhuc z1, z2, ketQua;
+    ComplexNumber CN1, CN2;
+    cout << "Enter the first complex number:" << endl;
+    CN1 = ComplexNumberInput();
+    cout << "\nEnter the second complex number:" << endl;
+    CN2 = ComplexNumberInput();
 
-    // Nhập dữ liệu
-    nhapSoPhuc(z1, "so phuc z1");
-    cout << endl;
-    nhapSoPhuc(z2, "so phuc z2");
-    cout << endl;
+    cout << "\nEntered complex numbers:" << endl;
+    cout << "CN1 = "; ComplexNumberOutput(CN1); cout << endl;
+    cout << "CN2 = "; ComplexNumberOutput(CN2); cout << endl;
 
-    // Hiển thị số phức đã nhập
-    cout << "z1 = "; xuatSoPhuc(z1); cout << endl;
-    cout << "z2 = "; xuatSoPhuc(z2); cout << endl;
-    cout << "-----------------------------------" << endl;
+    cout << "\nModulus:" << endl;
+    cout << "|CN1| = " << ComplexNumberModulus(CN1) << endl;
+    cout << "|CN2| = " << ComplexNumberModulus(CN2) << endl;
 
-    // Phép cộng
-    ketQua = cong(z1, z2);
-    cout << "z1 + z2 = "; xuatSoPhuc(ketQua); cout << endl;
+    cout << "\nArithmetic operations:" << endl;
+    cout << "CN1 + CN2 = "; ComplexNumberOutput(Addition(CN1, CN2)); cout << endl;
+    cout << "CN1 - CN2 = "; ComplexNumberOutput(Subtraction(CN1, CN2)); cout << endl;
+    cout << "CN1 * CN2 = "; ComplexNumberOutput(Multiplication(CN1, CN2)); cout << endl;
+    cout << "CN1 / CN2 = "; ComplexNumberOutput(Division(CN1, CN2)); cout << endl;
 
-    // Phép trừ
-    ketQua = tru(z1, z2);
-    cout << "z1 - z2 = "; xuatSoPhuc(ketQua); cout << endl;
-
-    // Phép nhân
-    ketQua = nhan(z1, z2);
-    cout << "z1 * z2 = "; xuatSoPhuc(ketQua); cout << endl;
-
-    // Phép chia
-    if (chia(z1, z2, ketQua)) {
-        cout << "z1 / z2 = "; xuatSoPhuc(ketQua); cout << endl;
-    } else {
-        cout << "z1 / z2 = Khong the chia vi z2 = 0!" << endl;
-    }
+    cout << "\nComparisons:" << endl;
+    cout << "CN1 == CN2: " << (Equalization(CN1, CN2) ? "True" : "False") << endl;
+    cout << "CN1 != CN2: " << (Difference(CN1, CN2) ? "True" : "False") << endl;
+    cout << "CN1 > CN2: "  << (Bigger(CN1, CN2) ? "True" : "False") << endl;
+    cout << "CN1 < CN2: "  << (Smaller(CN1, CN2) ? "True" : "False") << endl;
 
     return 0;
 }
